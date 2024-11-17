@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tutorial</title>
+    <style>
+        body {
+            font-size: large;
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    Jai Shree Ram<br>
+
+    <!-- <script>
+        
+        let name = "Vishal chaubey";
+//console.log("hello",name,"Welcome");
+console.log(`Hello ${name}`);
+
+
+
+
+      
+
+// User Input
+
+// let value = +prompt("Enter first value");
+// let value1 = +prompt("Enter second value");
+
+// function val(a,b){
+//     console.log(a+b);
+    
+// }
+// val(value,value1);
+
+
+// Switch Statment
+
+// let userNumber= +prompt("Enter first number");
+
+// function monyhInyear(a){
+//    switch (a) {
+//     case 1:
+//         console.log("Jan");
+        
+//         break;
+//         case 2:
+//             console.log("feb");
+            
+//             break;
+//             case 3:
+//                 console.log("march");
+                
+//                 break;
+//                 case 4:
+//                     console.log("aprl");
+                    
+//                     break;
+//                     case 5:
+//                         console.log("may");
+                        
+//                         break;
+//                         case 6:
+//                             console.log("jun");
+                            
+//                             break; case 7:
+//                             console.log("july");
+                            
+//                             break;
+//                             case 8:
+//                             console.log("Aug");
+                            
+//                             break;
+//                             case 9:
+//                             console.log("Sep");
+                            
+//                             break;
+//                             case 10:
+//                             console.log("Oct");
+                            
+//                             break;
+//                             case 11:
+//                             console.log("Nov");
+                            
+//                             break;
+//                             case 12:
+//                             console.log("Dec");
+                            
+//                             break;
+
+   
+//     default:
+//         console.log("End of Months...");
+        
+//         break;
+//    }
+        
+// }
+// monyhInyear(userNumber);
+
+
+// let usenum = +prompt("Enter first number");
+// let usenum1 = +prompt("Enter second number");
+// let symbol = prompt("Enter symbol");
+
+// function calculator(symbol,text1,text2){
+//     switch (symbol) {
+//         case '+':
+//                 console.log("Addition is  : ",text1+text2);
+                            
+//             break;
+//             case '-':
+//                 console.log(text1-text2);
+//                 break;
+
+//                  case '*':
+//                 console.log(text1*text2);
+//                 break;
+
+//                 case '/':
+//                     console.log(text1/text2);
+//                     break;
+
+//         default:
+//             console.log("Wrong Number");
+            
+//             break;
+//     }
+// }
+
+// calculator(symbol,usenum,usenum1);
+
+
+
+
+
+
+
+
+
+
+
+// Pure Function   (return value)
+
+// function returnMoney(){
+//     console.log(("i am returning money"));
+//         return 1000;
+    
+// }
+// let wallet = returnMoney()
+// console.log(wallet);
+
+
+// Void Function (No return value)
+
+  
+
+function returnMoney(){
+    console.log(("i am returning money"));
+        
+    
+}
+let wallet = returnMoney()
+console.log(wallet);
+
+
+    </script> -->
+    <script type="text/javascript">
+
+        /*   let i,j;
+  
+          for(i=1;i<=5;i++){
+              for(j=1;j<=i;j++){
+                  document.write("*");
+              }
+              document.write("<br/>");
+          }
+  console.log(`You are a developer ${isDeveloper? "":"not"}a Developer`);*/
+
+
+
+      /*  function affortIt(price,taxrate,balance){
+            var total = price+price*taxrate;
+            if(total <= balance){
+                alert("Yes");
+            }else{
+                alert("No");
+            }
+        }
+        affortIt();*/
+
+
+// Write a javascript function that prompt the user to input a number, and then gives them 5 chances to guess the square of the number
+      var theNumber = +prompt("Pick a number", "");
+       let counter =0;
+       var theSquare;
+       var theireNumber;
+       var guess;
+       theSquare = num * num;
+       for (var i = 1; i <= 5; i++) {
+           theireNumber = prompt("What is " + num + "Squared", "0");
+           guess = parseInt(theireNumber);
+           if (guess == theSquare) {
+               alert("Currect");
+               break;
+           } else {
+               alert("Attempt" + i + "is wrong");
+           }
+       }
+      
+    </script>
+
+    <p>Hello world
+        <hr />
+        My name is vishal chaubey
+        <hr>
+
+
+
+    </p>
+
+    <p>
+        HELLO TTHERE
+    </p>
+    <blockquote>
+        <p>HELLOVISHAL</p>
+    </blockquote>
+    <blockquote></blockquote>
+    <p>HELLOVISHAL</p>
+    </blockquote>
+    <blockquote>
+        <p>Mr Vishal chaubey/p>
+    </blockquote>
+    <blockquote>
+        <p>Hello mr p pitamber</p>
+
+    </blockquote>
+
+
+    <p>Hello<ins>Chaubey</ins></p>  
+    <strong>Vishal</strong>
+    <b>Vishal</b>
+    <em>Vishal</em>
+    <i>Vishal</i>
+</body>
+
+</html>

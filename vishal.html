@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(67, 149, 243);
+        }
+        .book {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 21px;
+            width: 90px;
+            font-size: 11px;
+            text-align: center; 
+        }
+        .book:hover{
+            background-color: red;
+            color: white;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 300px;
+        }
+        button {
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        #history {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            border-radius: 5px;
+        }
+        .success-popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 255, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s, fadeOut 3s 1s forwards;
+        }
+        .success-message {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .converter {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Book Store</h1>
+
+<div id="books-list">
+    <div class="book" onclick="selectBook('Book A', 20)">
+        <h2>Book A</h2>
+        <p>Price: $20</p>
+    </div>
+    <div class="book" onclick="selectBook('Book B', 30)">
+        <h2>Book B</h2>
+        <p>Price: $30</p>
+    </div>
+    <div class="book" onclick="selectBook('Book C', 25)">
+        <h2>Book C</h2>
+        <p>Price: $25</p>
+    </div>
+    
+<div class="converter">
+    <h1>Dollar to INR Converter</h1>
+    <input type="number" id="usd" placeholder="Enter amount in USD" />
+    <button onclick="convertCurrency()">Convert</button>
+    <div id="result"></div>
+</div>
+</div>
+
+<div id="confirmation-popup" class="popup">
+    <div class="popup-content">
+        <h3>Confirm Purchase</h3>
+        <p id="confirm-message"></p>
+        <button onclick="confirmPurchase()">Confirm</button>
+        <button onclick="closePopup('confirmation-popup')">Cancel</button>
+    </div>
+</div>
+
+<div id="payment-popup" class="popup">
+    <div class="popup-content">
+        <h3>Payment Gateway</h3>
+        <p>Processing payment for <span id="payment-details"></span>.</p>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        <input type="text" id="mobile" placeholder="Mobile Number" required>
+        <select id="payment-method">
+            <option value="">Select Payment Method</option>
+            <option value="credit-card">Credit Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="bank-transfer">Bank Transfer</option>
+        </select>
+        <button onclick="processPayment()">Confirm Payment</button>
+        <button onclick="closePopup('payment-popup')">Cancel</button>
+    </div>
+</div>
+
+<div id="success-popup" class="success-popup">
+    <div class="success-message">
+        <h3>Successful Payment!</h3>
+        <p id="success-details"></p>
+    </div>
+</div>
+
+<h2 id="result"></h2>
+
+<div id="history">
+    <h3>Purchase History</h3>
+    <ul id="history-list"></ul>
+</div>
+
+<script>
+// Variables to store selected book details and purchase history
+let selectedBook = '';
+let selectedPrice = 0;
+const purchaseHistory = [];
+
+// Function to select a book
+function selectBook(bookName, price) {
+    selectedBook = bookName;
+    selectedPrice = price;
+    document.getElementById('confirm-message').textContent = `Are you sure you want to buy ${bookName} for $${price}?`;
+    openPopup('confirmation-popup');
+}
+
+// Function to open a popup
+function openPopup(popupId) {
+    document.getElementById(popupId).style.display = 'flex';
+}
+
+// Function to close a popup
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = 'none';
+}
+
+// Function to confirm the purchase
+function confirmPurchase() {
+    closePopup('confirmation-popup');
+    document.getElementById('payment-details').textContent = `${selectedBook} for $${selectedPrice}`;
+    openPopup('payment-popup');
+}
+
+// Function to process payment
+function processPayment() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const mobile = document.getElementById('mobile').value;
+    const paymentMethod = document.getElementById('payment-method').value;
+
+    // Basic validation
+    if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+    }
+    if (!username || !mobile || !paymentMethod) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Validate password length
+    if (password.length < 5 || password.length > 10) {
+        alert("Please enter a valid password between 5 to 10 characters. Thank you!");
+        return;
+    }
+
+    // If all validations pass, proceed with payment
+    closePopup('payment-popup');
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = `Payment successful! You bought ${selectedBook} for $${selectedPrice}.`;
+    
+    // Add to purchase history
+    const purchase = `Purchased: ${selectedBook} for $${selectedPrice} by ${username}`;
+    purchaseHistory.push(purchase);
+    updateHistory();
+
+    // Show success popup
+    document.getElementById('success-details').textContent = `${username}, you have successfully completed the payment for ${selectedBook}.`;
+    document.getElementById('success-popup').style.display = 'flex';
+
+    // Hide success popup after a few seconds
+    setTimeout(() => {
+        closePopup('success-popup');
+    }, 4000);
+}
+
+// Function to update purchase history display
+function updateHistory() {
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = '';
+    purchaseHistory.forEach((purchase) => {
+        const li = document.createElement('li');
+        li.textContent = purchase;
+        historyList.appendChild(li);
+    });
+}
+
+// Event listener to close popups when clicking outside
+window.onclick = function(event) {
+    const confirmationPopup = document.getElementById('confirmation-popup');
+    const paymentPopup = document.getElementById('payment-popup');
+    const successPopup = document.getElementById('success-popup');
+    if (event.target === confirmationPopup) {
+        closePopup('confirmation-popup');
+    }
+    if (event.target === paymentPopup) {
+        closePopup('payment-popup');
+    }
+    if (event.target === successPopup) {
+        closePopup('success-popup');
+    }
+};
+const conversionRate = 83.25; // Update this value as needed
+
+function convertCurrency() {
+    const usd = parseFloat(document.getElementById('usd').value);
+    if (isNaN(usd) || usd < 0) {
+        alert('Please enter a valid amount in USD.');
+        return;
+    }
+    const inr = (usd * conversionRate).toFixed(2);
+    document.getElementById('result').textContent = `${usd} USD = ${inr} INR`;
+}
+</script>
+
+</body>
+</html>

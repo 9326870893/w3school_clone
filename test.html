@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .featured-products {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .product {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            width: 200px;
+        }
+        
+        footer {
+            background-color: #2874f0;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        
+    </style>
+    <script>
+        const products = [
+            { name: "Product 1", price: "$19.99", img: "product1.jpg" },
+            { name: "Product 2", price: "$29.99", img: "product2.jpg" },
+            { name: "Product 3", price: "$39.99", img: "product3.jpg" }
+        ];
+
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: ${product.price}</p>
+                    <button onclick="addToCart('${product.name}')">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            }
+        }
+
+        function addToCart(productName) {
+            alert(`${productName} has been added to your cart!`);
+        }
+
+        let stockCount = 10;
+
+        function checkStock() {
+            let message = "Items in stock: ";
+            let count = stockCount;
+
+            while (count > 0) {
+                message += count + " ";
+                count--;
+            }
+
+            alert(message);
+        }
+
+        window.onload = function() {
+            displayProducts();
+            checkStock();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Flipkart Clone</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="featured-products" id="product-list">
+            <h2>Featured Products</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Flipkart Clone</p>
+    </footer>
+</body>
+</html>
